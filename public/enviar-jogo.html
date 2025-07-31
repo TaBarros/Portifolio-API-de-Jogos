@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enviar Novo Jogo</title>
+  <link rel="stylesheet" href="estilos.css" /> 
+</head>
+<body class="dark-theme">
+  <div class="container">
+    <h1>🎮 Enviar Novo Jogo</h1>
+    <form id="formEnviarJogo">
+      <label for="titulo">Título do Jogo:</label>
+      <input type="text" id="titulo" name="titulo" required /> 
+      
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao" rows="4"></textarea> 
+      
+      <label for="categoria">Categoria:</label>
+      <input type="text" id="categoria" name="categoria" /> 
+      
+      <label for="lancamento">Ano de Lançamento:</label>
+      <input type="number" id="lancamento" name="lancamento" required /> 
+      
+      <button type="submit">Enviar Jogo</button>
+    </form>
+    <p id="mensagem"></p>
+    <a class="link-voltar" href="index.html">⬅️ Voltar para Início</a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("formEnviarJogo").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      enviarNovoJogo(); 
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem('token')) {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+</body>
+</html>

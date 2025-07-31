@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h1>📋 Cadastro</h1>
+    <form id="cadastroForm">
+      <!-- IDs para alinhar com a função registrar() em public/script.js -->
+      <input type="text" id="username" placeholder="Usuário" required />
+      <input type="email" id="emailRegistro" placeholder="E-mail" required /> 
+      <input type="password" id="passwordRegistro" placeholder="Senha" required />
+      <button type="submit">Cadastrar</button>
+    </form>
+    <p>Já tem conta? <a href="login.html">Faça login</a></p>
+  </div>
+
+  <!-- Importa o script.js externo -->
+  <script src="script.js"></script>
+  <script>
+    // Adiciona o event listener para o formulário de cadastro
+    // Ele chama a função 'registrar()' que está definida em public/script.js
+    document.getElementById("cadastroForm").addEventListener("submit", (e) => {
+      e.preventDefault(); // ESSENCIAL: Impede o envio padrão do formulário
+      registrar(); // Chama a função registrar() do public/script.js
+    });
+  </script>
+</body>
+</html>

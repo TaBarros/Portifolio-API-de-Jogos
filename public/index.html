@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API de Jogos</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h1>🎮 API de Jogos</h1>
+    <p>Você está logado.</p>
+    
+    <button onclick="logout()" class="logout-btn">Sair</button>
+
+    <h2>Enviar novo jogo</h2>
+    <form id="jogoForm">
+      <label for="titulo">Título do Jogo:</label>
+      <input type="text" id="titulo" placeholder="Título do jogo" required />
+
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" placeholder="Descrição do jogo" rows="4"></textarea>
+
+      <label for="categoria">Categoria:</label>
+      <input type="text" id="categoria" placeholder="Categoria (Ex: Ação, RPG)" />
+
+      <label for="lancamento">Ano de Lançamento:</label>
+      <input type="number" id="lancamento" placeholder="Ano de lançamento" required />
+      
+      <button type="submit">Enviar jogo</button>
+    </form>
+    
+    <div id="mensagem" style="margin-top: 1rem;"></div> 
+
+    <h2 style="margin-top: 2rem;">📋 Jogos Cadastrados</h2>
+    <div id="jogos" style="margin-top: 1rem; text-align: left;">
+        <p>Carregando jogos...</p>
+    </div>
+  </div>
+
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem("token")) {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "login.html";
+      }
+      carregarJogos(); 
+    });
+    document.getElementById("jogoForm").addEventListener("submit", (e) => {
+      e.preventDefault(); 
+      enviarNovoJogo(); 
+    });
+  </script>
+</body>
+</html>

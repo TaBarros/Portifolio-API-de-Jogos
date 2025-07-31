@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Detalhes do Jogo</title>
+  <link rel="stylesheet" href="estilos.css"> 
+</head>
+<body>
+  <div class="container"> 
+    <h1>🎮 Detalhes do Jogo</h1>
+    <div id="detalhes">
+      <p>Carregando detalhes do jogo...</p>
+    </div>
+
+    <h3>Avaliar Jogo</h3>
+    <div class="avaliacao-form"> 
+      <input type="number" id="nota" placeholder="Nota de 0 a 10" min="0" max="10" required>
+      <button id="btnAvaliar">Enviar Avaliação</button> 
+    </div>
+    <p id="feedbackAvaliacao" style="color: green;"></p> 
+    
+    <h3>Média das Avaliações</h3>
+    <div id="media">
+      <p>Calculando média...</p>
+    </div>
+    <p style="margin-top: 1rem;"><a href="index.html">⬅️ Voltar para a lista de jogos</a></p>
+  </div>
+
+ 
+  <script src="script.js"></script>
+  <script>
+
+    const params = new URLSearchParams(window.location.search);
+    const jogoId = params.get("id"); 
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem('token')) {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "login.html";
+      }
+    });
+
+    if (!jogoId) {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById("detalhes").innerHTML = "<p style='color: red;'>ID do jogo não fornecido na URL.</p>";
+            document.querySelector('.avaliacao-form').style.display = 'none';
+            document.querySelector('h3:last-of-type').style.display = 'none'; 
+            document.querySelector('h3:nth-of-type(2)').style.display = 'none'; 
+        });
+    } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarDetalhes(jogoId);
+            carregarMedia(jogoId);
+
+            document.getElementById('btnAvaliar').addEventListener('click', async () => {
+                await avaliar(); 
+            });
+        });
+    }
+  </script>
+</body>
+</html>
